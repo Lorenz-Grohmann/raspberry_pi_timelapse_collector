@@ -134,7 +134,7 @@ def main():
             else:
                 logger.info("Picture Uploaded")
         else:
-            safe_image(image_data, image_date)#
+            safe_image(image_data, image_date)
 
         stream.seek(0)
         stream.truncate()

@@ -38,22 +38,15 @@ def on_new_client(clientsocket, addr):
             if not image_len:
                 break
             image_date = struct.unpack('<L', connection.read(struct.calcsize('<L')))[0]
-            print(1)
-
             image_stream = io.BytesIO()
             image_stream.write(connection.read(image_len))
-            print(2)
-
             image_stream.seek(0)
             image = Image.open(image_stream)
-            print(3)
-
             try:
                 image.verify()
             except:
                 logger.info("Image verification failed.. Skipping")
                 continue
-            print(4)
             #image = Image.open(image_stream) #Reopen is neccesary after verify...
             save_image(image_stream, collection, image_date)
             if(telegram_count[collection] == TELEGRAM_SEND_INTERVAL):
